@@ -20,7 +20,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // --- Configuration ---
-const MONGODB_URI = "mongodb+srv://vanshguptaa654:vanshguptaa654@cluster0.lbtnknj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"; // <-- REPLACE WITH YOUR MONGO URL
+const MONGODB_URI = ""; // <-- REPLACE WITH YOUR MONGO URL
 const JWT_SECRET = "your_super_secret_key_change_me"; // <-- CHANGE THIS SECRET KEY
 
 
@@ -195,7 +195,7 @@ app.get('/api/listings/my-listings', authenticateToken, hasRole(['vendor']), asy
 // or a new API endpoint. Here's a new API route for the AI.
 app.post('/api/chatbot', async (req, res) => {
     const { message } = req.body;
-    const API_KEY = "AIzaSyDiUCN5J3sBPsv2m_baqf2bJFfWqBuW4fI";
+    const API_KEY = "";
     
     // We need to import the library on the server side
     const { GoogleGenerativeAI } = await import("@google/generative-ai");
@@ -236,5 +236,6 @@ app.post('/api/chatbot', async (req, res) => {
         res.status(500).json({ error: "I'm sorry, I'm having trouble connecting right now. Please try again later." });
     }
 });
+
 
 
