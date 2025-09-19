@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Smart Tourism Platform - Jharkhand</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+   <style>
+       body {
+           font-family: 'Inter', sans-serif;
+       }
+       .hero-section {
+           background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/jhahs.jpg');
+           background-size: cover;
+           background-position: center;
+       }
+       /* Hide scrollbar for dashboard */
+       .dashboard-container::-webkit-scrollbar {
+           display: none;
+       }
+       .dashboard-container {
+           -ms-overflow-style: none;  /* IE and Edge */
+           scrollbar-width: none;  /* Firefox */
+       }
+
+       /* Hide scrollbar for carousel */
+       .carousel-container::-webkit-scrollbar {
+           display: none;
+       }
+       .carousel-container {
+           -ms-overflow-style: none;
+           scrollbar-width: none;
+       }
+   </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+
+   <header class="bg-white shadow-md sticky top-0 z-50">
+       <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+           <a href="#" class="text-2xl font-bold text-teal-600">Jharkhand Tourism</a>
+           <div id="nav-links" class="hidden md:flex space-x-6 items-center">
+               <a href="#destinations" class="text-gray-600 hover:text-teal-600">Destinations</a>
+               <a href="#services" class="text-gray-600 hover:text-teal-600">Services</a>
+               <a href="#handicrafts" class="text-gray-600 hover:text-teal-600">Handicrafts</a>
+               <a href="#contact" class="text-gray-600 hover:text-teal-600">Contact</a>
+           </div>
+           <div id="auth-buttons">
+               <button id="login-register-btn" class="bg-teal-600 text-white py-2 px-4 rounded-full hover:bg-teal-700 transition duration-300">Login / Register</button>
+               <button id="logout-btn" class="hidden bg-red-500 text-white py-2 px-4 rounded-full hover:bg-red-600 transition duration-300">Logout</button>
+           </div>
+       </nav>
+   </header>
+ 
+   <div id="main-content">
+       <section class="hero-section text-white h-[60vh] flex items-center justify-center text-center">
+           <div class="container mx-auto px-6">
+               <h1 class="text-4xl md:text-6xl font-bold mb-4">Discover the Soul of India</h1>
+               <p class="text-lg md:text-xl mb-8">Experience the rich culture, stunning waterfalls, and lush forests of Jharkhand.</p>
+           </div>
+       </section>
+
+
+       <main class="container mx-auto px-6 py-12">
+           <section id="services" class="my-12">
+               <h2 class="text-3xl font-bold text-center mb-8">Our Services</h2>
+               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                   <div class="p-6 bg-white rounded-lg shadow-lg text-center">
+                       <div class="text-4xl text-teal-600 mb-4">🗺️</div>
+                       <h3 class="text-xl font-bold mb-2">Personalized Itinerary</h3>
+                       <p class="text-gray-600">Craft your perfect trip with our smart itinerary planner.</p>
+                   </div>
+                   <div class="p-6 bg-white rounded-lg shadow-lg text-center">
+                       <div class="text-4xl text-teal-600 mb-4">🏠</div>
+                       <h3 class="text-xl font-bold mb-2">Homestay Booking</h3>
+                       <p class="text-gray-600">Stay with locals and experience authentic Jharkhandi hospitality.</p>
+                   </div>
+                   <div class="p-6 bg-white rounded-lg shadow-lg text-center">
+                       <div class="text-4xl text-teal-600 mb-4">🎨</div>
+                       <h3 class="text-xl font-bold mb-2">Buy Handicrafts</h3>
+                       <p class="text-gray-600">Shop for unique, locally made arts and crafts directly from artisans.</p>
+                   </div>
+                   <div class="p-6 bg-white rounded-lg shadow-lg text-center">
+                       <div class="text-4xl text-teal-600 mb-4">🤖</div>
+                       <h3 class="text-xl font-bold mb-2">Multilingual Chatbot</h3>
+                       <p class="text-gray-600">Get instant help and information in your preferred language.</p>
+                   </div>
+               </div>
+           </section>
+
+
+           <section id="destinations" class="my-12">
+               <h2 class="text-3xl font-bold text-center mb-8">Featured Destinations</h2>
+               <!-- Carousel container -->
+               <div class="relative">
+                   <div id="destinations-container" class="carousel-container flex overflow-x-auto space-x-6 pb-4 snap-x snap-mandatory">
+                       <!-- Destinations will be populated here by JavaScript -->
+                   </div>
+                   <!-- Carousel Navigation Buttons -->
+                   <button id="prev-btn" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:bg-gray-200 transition-colors z-10 -ml-4 md:ml-0">
+                       <i class="fas fa-chevron-left text-teal-600"></i>
+                   </button>
+                   <button id="next-btn" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:bg-gray-200 transition-colors z-10 -mr-4 md:mr-0">
+                       <i class="fas fa-chevron-right text-teal-600"></i>
+                   </button>
+               </div>
+           </section>
+       </main>
+   </div>
+
+
+   <div id="dashboard-section" class="hidden container mx-auto px-6 py-12">
+       <h2 id="dashboard-title" class="text-3xl font-bold mb-8">My Dashboard</h2>
+
+
+       <div id="tourist-dashboard" class="hidden dashboard-container space-y-8">
+           <div>
+               <h3 class="text-2xl font-semibold mb-4">My Bookings</h3>
+               <div id="tourist-bookings" class="bg-white p-6 rounded-lg shadow-md">Your bookings will appear here.</div>
+           </div>
+           <div>
+               <h3 class="text-2xl font-semibold mb-4">Rate & Review a Service</h3>
+               <form id="review-form" class="bg-white p-6 rounded-lg shadow-md space-y-4">
+                   <input type="text" placeholder="Service/Guide/Homestay Name" class="w-full p-2 border rounded">
+                   <select class="w-full p-2 border rounded">
+                       <option value="5">★★★★★</option>
+                       <option value="4">★★★★☆</option>
+                       <option value="3">★★★☆☆</option>
+                       <option value="2">★★☆☆☆</option>
+                       <option value="1">★☆☆☆☆</option>
+                   </select>
+                   <textarea placeholder="Write your review..." class="w-full p-2 border rounded" rows="4"></textarea>
+                   <button type="submit" class="w-full bg-teal-600 text-white py-2 px-4 rounded-full hover:bg-teal-700">Submit Review</button>
+               </form>
+           </div>
+       </div>
+
+
+       <div id="vendor-dashboard" class="hidden dashboard-container space-y-8">
+           <div>
+               <h3 class="text-2xl font-semibold mb-4">My Product Listings</h3>
+               <div id="vendor-listings" class="bg-white p-6 rounded-lg shadow-md">Your products will appear here.</div>
+           </div>
+           <div>
+               <h3 class="text-2xl font-semibold mb-4">Create New Listing</h3>
+               <form id="listing-form" class="bg-white p-6 rounded-lg shadow-md space-y-4">
+                   <input type="text" name="name" placeholder="Product Name" class="w-full p-2 border rounded" required>
+                   <textarea name="description" placeholder="Product Description" class="w-full p-2 border rounded" rows="3" required></textarea>
+                   <input type="number" name="price" placeholder="Price (INR)" class="w-full p-2 border rounded" required>
+                   <input type="url" name="imageUrl" placeholder="Image URL" class="w-full p-2 border rounded" required>
+                   <button type="submit" class="w-full bg-teal-600 text-white py-2 px-4 rounded-full hover:bg-teal-700">Add Product</button>
+               </form>
+           </div>
+       </div>
+
+
+       <div id="guide-dashboard" class="hidden dashboard-container space-y-8">
+           <div>
+               <h3 class="text-2xl font-semibold mb-4">Manage Booking Requests</h3>
+               <div id="guide-bookings" class="bg-white p-6 rounded-lg shadow-md">Booking requests will appear here.</div>
+           </div>
+       </div>
+
+
+       <div id="admin-dashboard" class="hidden dashboard-container space-y-8">
+           <div>
+               <h3 class="text-2xl font-semibold mb-4">User Management</h3>
+               <div id="user-management" class="bg-white p-6 rounded-lg shadow-md">User list will appear here.</div>
+           </div>
+       </div>
+   </div>
+
+
+   <div id="chatbot-ui" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[99]">
+       <div class="bg-gray-50 rounded-lg shadow-2xl w-full max-w-md h-[80vh] flex flex-col relative">
+           <div class="bg-teal-600 text-white p-4 rounded-t-lg flex justify-between items-center">
+               <h3 class="text-xl font-semibold">Jharkhand Tourism Chatbot</h3>
+               <button id="close-chatbot" class="text-white hover:text-gray-200 text-2xl">&times;</button>
+           </div>
+  
+           <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4">
+               <div class="flex items-start">
+                   <div class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center mr-2">
+                       <i class="fas fa-robot text-gray-600"></i>
+                   </div>
+                   <div class="bg-white p-3 rounded-xl shadow">
+                       <p class="text-sm">Hello! I'm your virtual guide to Jharkhand. How can I help you today?</p>
+                   </div>
+               </div>
+           </div>
+  
+           <div class="p-4 bg-white border-t border-gray-200">
+               <div class="flex items-center">
+                   <input type="text" id="chat-input" placeholder="Type a message..." class="flex-1 p-3 border rounded-full focus:outline-none focus:ring-2 focus:ring-teal-600 transition duration-200">
+                   <button id="send-button" class="ml-2 bg-teal-600 text-white p-3 rounded-full hover:bg-teal-700 transition duration-300">
+                       <i class="fas fa-paper-plane"></i>
+                   </button>
+               </div>
+           </div>
+       </div>
+   </div>
+
+
+   <footer id="contact" class="bg-gray-800 text-white py-12">
+       <div class="container mx-auto px-6 text-center">
+           <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
+           <p>&copy; 2025 Smart Tourism Platform - the Atlas Guide.</p>
+       </div>
+   </footer>
+
+
+   <div id="auth-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+       <div class="bg-white rounded-lg shadow-2xl p-8 w-full max-w-md">
+           <form id="login-form">
+               <h2 class="text-2xl font-bold text-center mb-6">Login</h2>
+               <div class="space-y-4">
+                   <input type="email" name="email" placeholder="Email" class="w-full p-3 border rounded-lg" required>
+                   <input type="password" name="password" placeholder="Password" class="w-full p-3 border rounded-lg" required>
+                   <button type="submit" class="w-full bg-teal-600 text-white py-3 rounded-lg font-semibold hover:bg-teal-700">Login</button>
+               </div>
+               <p class="text-center mt-4">Don't have an account? <a href="#" id="show-register" class="text-teal-600 hover:underline">Register</a></p>
+           </form>
+           <form id="register-form" class="hidden">
+               <h2 class="text-2xl font-bold text-center mb-6">Register</h2>
+               <div class="space-y-4">
+                   <input type="text" name="name" placeholder="Full Name" class="w-full p-3 border rounded-lg" required>
+                   <input type="text" name="username" placeholder="Username" class="w-full p-3 border rounded-lg" required>
+                   <input type="email" name="email" placeholder="Email" class="w-full p-3 border rounded-lg" required>
+                   <input type="password" name="password" placeholder="Password" class="w-full p-3 border rounded-lg" required>
+                   <select name="role" class="w-full p-3 border rounded-lg" required>
+                       <option value="" disabled selected>Select your role...</option>
+                       <option value="tourist">Tourist</option>
+                       <option value="vendor">Local Vendor / Homestay</option>
+                       <option value="guide">Verified Guide</option>
+                   </select>
+                   <button type="submit" class="w-full bg-teal-600 text-white py-3 rounded-lg font-semibold hover:bg-teal-700">Register</button>
+               </div>
+               <p class="text-center mt-4">Already have an account? <a href="#" id="show-login" class="text-teal-600 hover:underline">Login</a></p>
+           </form>
+           <button id="close-modal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button>
+       </div>
+   </div>
+
+
+   <div id="message-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+       <div class="bg-white rounded-lg shadow-2xl p-8 w-full max-w-sm text-center relative">
+           <h3 id="message-title" class="text-xl font-bold mb-4"></h3>
+           <p id="message-content" class="text-gray-700 mb-6"></p>
+           <button id="close-message-btn" class="bg-teal-600 text-white py-2 px-4 rounded-full hover:bg-teal-700">OK</button>
+       </div>
+   </div>
+  
+   <button id="chatbot-button" class="fixed bottom-6 right-6 p-4 bg-teal-600 text-white rounded-full shadow-lg hover:bg-teal-700 transition-colors duration-300 z-[100]">
+       <i class="fas fa-robot text-2xl"></i>
+   </button>
+  
+   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
+   <script>
+       document.addEventListener('DOMContentLoaded', () => {
+           // --- Element Selectors ---
+           const mainContent = document.getElementById('main-content');
+           const dashboardSection = document.getElementById('dashboard-section');
+           const loginRegisterBtn = document.getElementById('login-register-btn');
+           const logoutBtn = document.getElementById('logout-btn');
+           const authModal = document.getElementById('auth-modal');
+           const closeModalBtn = document.getElementById('close-modal');
+           const loginForm = document.getElementById('login-form');
+           const registerForm = document.getElementById('register-form');
+           const showRegisterLink = document.getElementById('show-register');
+           const showLoginLink = document.getElementById('show-login');
+          
+           // --- Message Modal Selectors ---
+           const messageModal = document.getElementById('message-modal');
+           const messageTitle = document.getElementById('message-title');
+           const messageContent = document.getElementById('message-content');
+           const closeMessageBtn = document.getElementById('close-message-btn');
+
+
+           // --- Chatbot UI Selectors ---
+           const chatbotButton = document.getElementById('chatbot-button');
+           const chatbotUI = document.getElementById('chatbot-ui');
+           const closeChatbotBtn = document.getElementById('close-chatbot');
+           const chatInput = document.getElementById('chat-input');
+           const sendButton = document.getElementById('send-button');
+           const chatMessages = document.getElementById('chat-messages');
+
+           // --- Carousel Selectors ---
+           const destinationsContainer = document.getElementById('destinations-container');
+           const prevBtn = document.getElementById('prev-btn');
+           const nextBtn = document.getElementById('next-btn');
+
+
+           // --- API Base URL ---
+           const API_URL = 'http://localhost:3000/api';
+
+
+           // --- Helper Functions ---
+           const showMessage = (title, message) => {
+               messageTitle.textContent = title;
+               messageContent.textContent = message;
+               messageModal.classList.remove('hidden');
+           };
+
+
+           const hideMessage = () => {
+               messageModal.classList.add('hidden');
+           };
+
+
+           // --- State Management ---
+           const checkLoginState = () => {
+               const token = localStorage.getItem('token');
+               const user = JSON.parse(localStorage.getItem('user'));
+
+
+               if (token && user) {
+                   mainContent.classList.add('hidden');
+                   dashboardSection.classList.remove('hidden');
+                   loginRegisterBtn.classList.add('hidden');
+                   logoutBtn.classList.remove('hidden');
+                   showDashboard(user.role);
+               } else {
+                   mainContent.classList.remove('hidden');
+                   dashboardSection.classList.add('hidden');
+                   loginRegisterBtn.classList.remove('hidden');
+                   logoutBtn.classList.add('hidden');
+                   fetchDestinations();
+               }
+           };
+
+
+           const showDashboard = (role) => {
+               document.querySelectorAll('.dashboard-container').forEach(d => d.classList.add('hidden'));
+              
+               const dashboardId = `${role}-dashboard`;
+               const dashboard = document.getElementById(dashboardId);
+               const dashboardTitle = document.getElementById('dashboard-title');
+              
+               if (dashboard) {
+                   dashboard.classList.remove('hidden');
+                   dashboardTitle.textContent = `${role.charAt(0).toUpperCase() + role.slice(1)} Dashboard`;
+                   loadDashboardData(role);
+               } else {
+                   dashboardTitle.textContent = "My Dashboard";
+               }
+           };
+
+
+           const loadDashboardData = (role) => {
+               const token = localStorage.getItem('token');
+               if (!token) return;
+
+
+               switch(role) {
+                   case 'vendor':
+                       fetchMyListings(token);
+                       break;
+                   // Add cases for 'tourist', 'guide', 'admin' to fetch their data
+               }
+           };
+
+
+           // --- API Calls ---
+           const fetchDestinations = async () => {
+               try {
+                   const response = await fetch(`${API_URL}/destinations`);
+                   const destinations = await response.json();
+                   const container = destinationsContainer;
+                   container.innerHTML = destinations.map(dest => `
+                       <div class="bg-white rounded-lg shadow-lg overflow-hidden flex-shrink-0 w-80 snap-center">
+                           <img src="${dest.imageUrl}" alt="${dest.name}" class="w-full h-48 object-cover">
+                           <div class="p-6">
+                               <h3 class="text-xl font-bold mb-2">${dest.name}</h3>
+                               <p class="text-gray-600">${dest.description}</p>
+                           </div>
+                       </div>
+                   `).join('');
+               } catch (error) {
+                   console.error("Failed to fetch destinations:", error);
+               }
+           };
+
+
+           const fetchMyListings = async (token) => {
+               try {
+                   const response = await fetch(`${API_URL}/listings/my-listings`, {
+                       headers: { 'Authorization': `Bearer ${token}` }
+                   });
+                   const listings = await response.json();
+                   const container = document.getElementById('vendor-listings');
+                   if(listings.length > 0) {
+                       container.innerHTML = listings.map(l => `
+                           <div class="border p-4 rounded-md flex justify-between items-center">
+                               <div>
+                                   <p class="font-bold">${l.name}</p>
+                                   <p>₹${l.price}</p>
+                               </div>
+                               <button class="text-red-500">Delete</button>
+                           </div>
+                       `).join('');
+                   } else {
+                       container.innerHTML = `<p>You haven't created any listings yet.</p>`;
+                   }
+               } catch (error) {
+                   showMessage('Error', 'Failed to fetch listings. Please try again.');
+                   console.error("Failed to fetch listings:", error);
+               }
+           };
+
+
+           // --- Chatbot API Call Function ---
+           async function getBotResponse(userMessage) {
+               try {
+                   const response = await fetch('/api/chatbot', {
+                       method: 'POST',
+                       headers: {
+                           'Content-Type': 'application/json'
+                       },
+                       body: JSON.stringify({ message: userMessage })
+                   });
+                   const data = await response.json();
+                   return data.botResponse;
+               } catch (error) {
+                   console.error("Error fetching AI response from server:", error);
+                   return "I'm sorry, I'm having trouble connecting right now. Please try again later.";
+               }
+           }
+          
+           // --- Event Listeners ---
+           loginRegisterBtn.addEventListener('click', () => authModal.classList.remove('hidden'));
+           closeModalBtn.addEventListener('click', () => authModal.classList.add('hidden'));
+           closeMessageBtn.addEventListener('click', hideMessage);
+
+
+           logoutBtn.addEventListener('click', () => {
+               localStorage.removeItem('token');
+               localStorage.removeItem('user');
+               checkLoginState();
+           });
+
+
+           showRegisterLink.addEventListener('click', (e) => {
+               e.preventDefault();
+               loginForm.classList.add('hidden');
+               registerForm.classList.remove('hidden');
+           });
+
+
+           showLoginLink.addEventListener('click', (e) => {
+               e.preventDefault();
+               registerForm.classList.add('hidden');
+               loginForm.classList.remove('hidden');
+           });
+
+
+           loginForm.addEventListener('submit', async (e) => {
+               e.preventDefault();
+               const formData = new FormData(loginForm);
+               const data = Object.fromEntries(formData.entries());
+
+
+               try {
+                   const response = await fetch(`${API_URL}/auth/login`, {
+                       method: 'POST',
+                       headers: { 'Content-Type': 'application/json' },
+                       body: JSON.stringify(data)
+                   });
+
+
+                   if (!response.ok) {
+                       const error = await response.json();
+                       throw new Error(error.message);
+                   }
+
+
+                   const result = await response.json();
+                   localStorage.setItem('token', result.token);
+                   localStorage.setItem('user', JSON.stringify(result.user));
+                  
+                   authModal.classList.add('hidden');
+                   showMessage('Success!', 'You have successfully logged in.');
+                   checkLoginState();
+
+
+               } catch (error) {
+                   showMessage('Login Failed', error.message);
+               }
+           });
+
+
+           registerForm.addEventListener('submit', async (e) => {
+               e.preventDefault();
+               const formData = new FormData(registerForm);
+               const data = Object.fromEntries(formData.entries());
+
+
+               if (!data.name || !data.username || !data.email || !data.password || !data.role) {
+                   showMessage('Validation Error', 'Please fill in all required fields.');
+                   return;
+               }
+
+
+               try {
+                   const response = await fetch(`${API_URL}/auth/register`, {
+                       method: 'POST',
+                       headers: { 'Content-Type': 'application/json' },
+                       body: JSON.stringify(data)
+                   });
+
+
+                   if (!response.ok) {
+                       const error = await response.json();
+                       throw new Error(error.message);
+                   }
+
+
+                   showMessage('Registration Successful!', 'You are now registered. Please log in.');
+                   showLoginLink.click();
+
+
+               } catch (error) {
+                   showMessage('Registration Failed', error.message);
+               }
+           });
+
+
+           document.getElementById('listing-form')?.addEventListener('submit', async (e) => {
+               e.preventDefault();
+               const token = localStorage.getItem('token');
+               const formData = new FormData(e.target);
+               const data = Object.fromEntries(formData.entries());
+
+
+               try {
+                   const response = await fetch(`${API_URL}/listings`, {
+                       method: 'POST',
+                       headers: {
+                           'Content-Type': 'application/json',
+                           'Authorization': `Bearer ${token}`
+                       },
+                       body: JSON.stringify(data)
+                   });
+                   if (!response.ok) throw new Error('Failed to create listing');
+                   e.target.reset();
+                   fetchMyListings(token); // Refresh list
+                   showMessage('Success', 'Listing created successfully!');
+               } catch (error) {
+                   showMessage('Creation Failed', error.message);
+               }
+           });
+
+
+           // --- Chatbot UI Event Listeners ---
+           chatbotButton.addEventListener('click', () => {
+               chatbotUI.classList.remove('hidden');
+           });
+          
+           closeChatbotBtn.addEventListener('click', () => {
+               chatbotUI.classList.add('hidden');
+           });
+
+
+           sendButton.addEventListener('click', async () => {
+               const userMessage = chatInput.value.trim();
+               if (userMessage) {
+                   // Display the user's message
+                   const userMessageHtml = `
+                       <div class="flex justify-end">
+                           <div class="bg-teal-500 text-white p-3 rounded-xl shadow max-w-xs">
+                               <p class="text-sm">${userMessage}</p>
+                           </div>
+                       </div>
+                   `;
+                   chatMessages.innerHTML += userMessageHtml;
+                   chatInput.value = ''; // Clear the input field
+                   chatMessages.scrollTop = chatMessages.scrollHeight; // Auto-scroll to the bottom
+
+
+                   // Add a temporary "typing" message
+                   const typingIndicatorHtml = `
+                       <div id="typing-indicator" class="flex items-start">
+                           <div class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center mr-2">
+                               <i class="fas fa-robot text-gray-600 animate-bounce"></i>
+                           </div>
+                           <div class="bg-white p-3 rounded-xl shadow">
+                               <p class="text-sm">Typing...</p>
+                           </div>
+                       </div>
+                   `;
+                   chatMessages.innerHTML += typingIndicatorHtml;
+                   chatMessages.scrollTop = chatMessages.scrollHeight;
+
+
+                   // Get the real bot response from the AI
+                   const botResponseMarkdown = await getBotResponse(userMessage);
+
+
+                   // Convert Markdown to HTML using marked.js
+                   const botResponseHtml = marked.parse(botResponseMarkdown);
+
+
+                   // Remove the typing indicator
+                   const typingIndicator = document.getElementById('typing-indicator');
+                   if (typingIndicator) {
+                       typingIndicator.remove();
+                   }
+
+
+                   // Display the real bot response with the rendered HTML
+                   const botMessageHtml = `
+                       <div class="flex items-start">
+                           <div class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center mr-2">
+                               <i class="fas fa-robot text-gray-600"></i>
+                           </div>
+                           <div class="bg-white p-3 rounded-xl shadow max-w-xs">
+                               <p class="text-sm">${botResponseHtml}</p>
+                           </div>
+                       </div>
+                   `;
+                   chatMessages.innerHTML += botMessageHtml;
+                   chatMessages.scrollTop = chatMessages.scrollHeight; // Auto-scroll to the bottom
+               }
+           });
+          
+           // Allow sending message with Enter key
+           chatInput.addEventListener('keydown', (e) => {
+               if (e.key === 'Enter') {
+                   e.preventDefault(); // Prevents a new line in the input
+                   sendButton.click();
+               }
+           });
+           
+           // --- Carousel Navigation ---
+           nextBtn.addEventListener('click', () => {
+               const itemWidth = destinationsContainer.querySelector('.flex-shrink-0').offsetWidth;
+               destinationsContainer.scrollBy({
+                   left: itemWidth + 24, // Item width + gap
+                   behavior: 'smooth'
+               });
+           });
+
+           prevBtn.addEventListener('click', () => {
+               const itemWidth = destinationsContainer.querySelector('.flex-shrink-0').offsetWidth;
+               destinationsContainer.scrollBy({
+                   left: -(itemWidth + 24), // Item width + gap
+                   behavior: 'smooth'
+               });
+           });
+
+
+           // --- Initial Load ---
+           checkLoginState();
+       });
+   </script>
+</body>
+</html>
